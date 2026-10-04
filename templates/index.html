@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Detector</title>
+    <style>
+        :root { color-scheme: light; font-family: Arial, sans-serif; }
+        body { background: #f4f7fb; margin: 0; }
+        main {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 10vh auto;
+            max-width: 760px;
+            padding: 2.5rem;
+        }
+        h1 { color: #0f62fe; margin-top: 0; }
+        textarea {
+            border: 1px solid #8d8d8d;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font: inherit;
+            min-height: 110px;
+            padding: 0.8rem;
+            width: 100%;
+        }
+        button {
+            background: #0f62fe;
+            border: 0;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+            padding: 0.8rem 1.4rem;
+        }
+        #system_response {
+            background: #edf5ff;
+            border-left: 4px solid #0f62fe;
+            line-height: 1.5;
+            margin-top: 1.5rem;
+            min-height: 1.5rem;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Emotion Detector</h1>
+        <p>Enter an English statement to identify its dominant emotion.</p>
+        <label for="textToAnalyze">Statement</label>
+        <textarea id="textToAnalyze" placeholder="Enter text here..."></textarea>
+        <button type="button" onclick="runSentimentAnalysis()">Analyze emotion</button>
+        <div id="system_response" aria-live="polite"></div>
+    </main>
+    <script>
+        async function runSentimentAnalysis() {
+            const text = document.getElementById("textToAnalyze").value;
+            const output = document.getElementById("system_response");
+            output.textContent = "Analyzing...";
+            try {
+                const response = await fetch(
+                    `/emotionDetector?textToAnalyze=${encodeURIComponent(text)}`
+                );
+                output.textContent = await response.text();
+            } catch (error) {
+                output.textContent = "Unable to contact the application. Please try again.";
+            }
+        }
+    </script>
+</body>
+</html>
