@@ -1,0 +1,29 @@
+$ python -c "from EmotionDetection import emotion_detector"
+EmotionDetection imported successfully: True
+
+$ python formatted-output-check
+{'anger': 0.003, 'disgust': 0.001, 'fear': 0.002, 'joy': 0.989, 'sadness': 0.005, 'dominant_emotion': 'joy'}
+
+$ python -m unittest -v test_emotion_detection.py
+test_anger (test_emotion_detection.TestEmotionDetector)
+An angry statement is classified as anger. ... ok
+test_blank_input (test_emotion_detection.TestEmotionDetector)
+A 400 response returns the standardized empty result. ... ok
+test_disgust (test_emotion_detection.TestEmotionDetector)
+A disgusted statement is classified as disgust. ... ok
+test_fear (test_emotion_detection.TestEmotionDetector)
+A fearful statement is classified as fear. ... ok
+test_joy (test_emotion_detection.TestEmotionDetector)
+A joyful statement is classified as joy. ... ok
+test_sadness (test_emotion_detection.TestEmotionDetector)
+A sad statement is classified as sadness. ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK
+
+$ pylint server.py EmotionDetection test_emotion_detection.py
+
+--------------------------------------------------------------------
+Your code has been rated at 10.00/10 (previous run: 10.00/10, +0.00)
